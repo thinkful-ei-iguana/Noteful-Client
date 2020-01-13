@@ -7,14 +7,14 @@ import config from '../config'
 import './Note.css'
 
 export default class Note extends React.Component {
-  static defaultProps ={
-    onDeleteNote: () => {},
+  static defaultProps = {
+    onDeleteNote: () => { },
   }
   static contextType = ApiContext;
-
   handleClickDelete = e => {
     e.preventDefault()
     const noteId = this.props.id
+    console.log(this.props)
 
     fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
@@ -37,12 +37,16 @@ export default class Note extends React.Component {
       })
   }
 
+
   render() {
     const { name, id, modified } = this.props
+
+    // console.log(this.context)
+    console.log(this.props)
     return (
       <div className='Note'>
         <h2 className='Note__title'>
-          <Link to={`/note/${id}`}>
+          <Link to={`/notes/${id}`}>
             {name}
           </Link>
         </h2>

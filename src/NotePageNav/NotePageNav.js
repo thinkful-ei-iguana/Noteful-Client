@@ -15,14 +15,15 @@ export default class NotePageNav extends React.Component {
     }
   }
   static contextType = ApiContext;
-
   render() {
+    console.log(this.props)
     const { notes, folders, } = this.context
-    const { noteId } = this.props.match.params
-    const note = findNote(notes, noteId) || {}
-    const folder = findFolder(folders, note.folderId)
+    const { note_id } = this.props.match.params
+    const note = findNote(notes, note_id) || {}
+    const folder = findFolder(folders, note.folderid)
+    console.log(this.context)
     return (
-      <div className='NotePageNav'>
+      < div className='NotePageNav' >
         <CircleButton
           tag='button'
           role='link'
@@ -33,12 +34,14 @@ export default class NotePageNav extends React.Component {
           <br />
           Back
         </CircleButton>
-        {folder && (
-          <h3 className='NotePageNav__folder-name'>
-            {folder.name}
-          </h3>
-        )}
-      </div>
+        {
+          folder && (
+            <h3 className='NotePageNav__folder-name'>
+              {folder.folder_name}
+            </h3>
+          )
+        }
+      </div >
     )
   }
 }
